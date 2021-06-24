@@ -1,0 +1,8 @@
+В названии файла не должно быть пробелов
+out = out.replace("[", "[\n    ")
+out = out.replace("{", "{\n      ")
+out = out.replace(",", ",\n     ")
+out = out.replace("      {", "    {")
+out = out.replace("},", "\n    },")
+out = out.replace("}]", "\n    }\n]")
+id = ["names_of_animal_owners", "animals"]

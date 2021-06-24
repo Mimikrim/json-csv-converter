@@ -1,0 +1,1 @@
+pk,model,fields/codename,fields/name,fields/content_type22,auth.permission,fieldsadd_logentry,Canaddlogentry,823,auth.permission,fieldschange_logentry,Canchangelogentry,824,auth.permission,fieldsdelete_logentry,Candeletelogentry,84,auth.permission,fieldsadd_group,Canaddgroup,210,auth.permission,fieldsadd_message,Canaddmessage,4
