@@ -18,6 +18,6 @@ import time
 #csv_to_json.common_file("common_csv_file.csv", "test_common_csv_file.json", None, None)
 #print("---%s seconds ---" % (time.time() - start_time))
 
-start_time = time.time()
-csv_to_json.common_file("uncommon_csv_file.csv", "test_uncommon_csv_file.json", None, None)
-print("---%s seconds ---" % (time.time() - start_time))
+#start_time = time.time()
+#csv_to_json.csv_to_json_several_files(["File_with_attachments_with_ID_names_of_animal_owners.csv","File_with_attachments_with_ID_animals.csv"], ["names_of_animal_owners", "animals"], "test_several_csv_files.json")
+#print("---%s seconds ---" % (time.time() - start_time))

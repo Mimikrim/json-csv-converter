@@ -1,0 +1,62 @@
+{
+    "names_of_animal_owners":[
+        {
+            "ID" : "001",
+            "name" : "Jim",
+            "animal ID" : "001",
+            "animal" : "cat",
+            "service" : "treatment"
+        },
+        {
+            "ID" : "002",
+            "name" : "Fred",
+            "animal ID" : "003",
+            "animal" : "dog",
+            "service" : "treatment"
+        },
+        {
+            "ID" : "003",
+            "name" : "Bob",
+            "animal ID" : "003",
+            "animal" : "dog",
+            "service" : "overseas animal"
+        },
+        {
+            "ID" : "004",
+            "name" : "Jil",
+            "animal ID" : "003",
+            "animal" : "dog",
+            "service" : "overseas animal"
+        }
+    ],
+    "animals":[
+        {
+            "owner ID" : "001",
+            "animal ID" : "001",
+            "animal" : "cat",
+            "animal name" : "-",
+            "service" : "treatment"
+        },
+        {
+            "owner ID" : "002",
+            "animal ID" : "003",
+            "animal" : "dog",
+            "animal name" : "Tot",
+            "service" : "treatment"
+        },
+        {
+            "owner ID" : "003",
+            "animal ID" : "004",
+            "animal" : "dog",
+            "animal name" : "-",
+            "service" : "overseas animal "
+        },
+        {
+            "owner ID" : "004",
+            "animal ID" : "005",
+            "animal" : "dog",
+            "animal name" : "-",
+            "service" : "overseas animal"
+        }
+    ]
+}

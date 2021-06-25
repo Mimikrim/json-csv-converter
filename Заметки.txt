@@ -6,3 +6,5 @@ out = out.replace("      {", "    {")
 out = out.replace("},", "\n    },")
 out = out.replace("}]", "\n    }\n]")
 id = ["names_of_animal_owners", "animals"]
+red_a = ['[', '{']
+            red_b = ['{\n    "' + identifiers[file] + '":[\n        ', '']
