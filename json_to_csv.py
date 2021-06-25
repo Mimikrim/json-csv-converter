@@ -6,7 +6,7 @@ def json_to_csv_without_id(columns, filename_json, filename_csv, delimiter):
     filename_csv = filename_csv.replace(".csv","")
     # Открываем файл формата .json и помещаем в словарь python считанную из него информацию
     try:
-        with open(filename_json, mode = "r", encoding = "UTF-8") as json_file:
+        with open(filename_json + ".json", mode = "r", encoding = "UTF-8") as json_file:
                 data = json.load(json_file)
     except:
         print("Не удалось открыть .json файл")
@@ -54,17 +54,17 @@ def json_to_csv_without_id(columns, filename_json, filename_csv, delimiter):
     len_array = len(array_str_data)
     # Запись в файл формата .csv
     try:
-        with open(filename_csv, mode = "w", encoding = "UTF-8") as csv_file:
+        with open(filename_csv + ".csv", mode = "w", encoding = "UTF-8") as csv_file:
             file_writer = csv.writer(csv_file, delimiter = delimiter, lineterminator = "\r")
             file_writer.writerow(columns)
+            i = 0
+            while i < len_array:
+                array_worlds = array_str_data[i].split(",")
+                file_writer.writerow(array_worlds)
+                i += 1
     except:
         print("Не удалось создать .csv файл")
         exit()
-    i = 0
-    while i < len_array:
-        array_worlds = array_str_data[i].split(",")
-        file_writer.writerow(array_worlds)
-        i += 1
 
 def json_to_csv_with_id(identifiers, filename_json, filename_csv,  delimiter):
 
