@@ -2,7 +2,9 @@ import json
 import csv
 
 class js:
+    
     def json_to_csv_without_id(columns, filename_json, filename_csv, delimiter):
+
         filename_json = filename_json.replace(".json","")
         filename_csv = filename_csv.replace(".csv","")
         # Открываем файл формата .json и помещаем в словарь python считанную из него информацию
@@ -96,21 +98,24 @@ class js:
             i += 1
 
 class cs:
+
     def common_csv(filename_csv, filename_json, red_a, red_b, delimiter):
+        # Открываем файл формата .csv
         try:
             filename_csv = filename_csv.replace(".csv", "")
             csvfile = open(filename_csv + ".csv", 'r', encoding = "UTF-8")
         except:
             print("Не удалось открыть .csv файл")
             exit()
+        # Преобразуем информацию из переменной csvfile формата csv в одну строку
         reader = csv.DictReader(csvfile, delimiter = delimiter)
         out = json.dumps( [ row for row in reader ] )
-
+        # Используемые параметры редактирования, если они не заданы при вызове функции 
         if red_a == None and red_b == None:
             red_a = ["[", "{", ",", "      {", "},", "}]"]
             red_b = ["[\n    ", "{\n      ", ",\n     ", "    {", "\n    },", "\n    }\n]"]
             print("Файл будет создан с редактированием по умолчанию")
-
+        # Применение параметров редактирования
         try:
             i = 0
             while i < len(red_a):
@@ -119,7 +124,7 @@ class cs:
         except:
             print("Редактирование не удалось")
             print("Файл будет создан без редактирования")
-
+        # Создание файла в формате .json и запись в него обработанной информации
         try:
             filename_json = filename_json.replace(".json", "")
             with open(filename_json + ".json", 'w') as f:
@@ -132,21 +137,23 @@ class cs:
                 print("Ну удалось создать .json файл")
 
     def csv_to_json_several_files(filenames_csv, identifiers, filename_json, delimiter):
-        file = 0
-        while file < len(filenames_csv):
+        # Переменная kol_file это количество преобразуемых csv файлов в файл json
+        kol_file = 0
+        while kol_file < len(filenames_csv):
+            # Открытие файла в формате .csv
             try:
-                filenames_csv[file] = filenames_csv[file].replace(".csv", "")
-                csvfile = open(filenames_csv[file] + ".csv", 'r', encoding = "UTF-8")
+                filenames_csv[kol_file] = filenames_csv[kol_file].replace(".csv", "")
+                csvfile = open(filenames_csv[kol_file] + ".csv", 'r', encoding = "UTF-8")
             except:
                 print("Не удалось открыть .csv файл")
                 exit()
+            # Преобразуем информацию из переменной csvfile формата csv в одну строку    
             reader = csv.DictReader(csvfile, delimiter = delimiter)
             out = json.dumps( [ row for row in reader ] )
-
-        
-            if file == 0:
+            # Редактирование информации
+            if kol_file == 0:
                 red_a = ['{', '",', '}, {\n            ', '[',': ']
-                red_b = ['{\n            ', '",\n           ', '\n        },\n        {\n            ', '{\n    "' + identifiers[file] + '":[\n        ', ' : ']
+                red_b = ['{\n            ', '",\n           ', '\n        },\n        {\n            ', '{\n    "' + identifiers[kol_file] + '":[\n        ', ' : ']
 
                 if len(filenames_csv) == 1:
                     red_a.append('}]')
@@ -165,11 +172,11 @@ class cs:
                     print("Редактирование не удалось")
                     print("Файл будет создан без редактирования")
 
-            if file != 0:
+            if kol_file != 0:
                 red_a = ['{', '",', '}, {\n            ', '[',': ']
-                red_b = ['{\n            ', '",\n           ', '\n        },\n        {\n            ', '    "' + identifiers[file] + '":[\n        ', ' : ']
-
-                if file == (len(filenames_csv) - 1):
+                red_b = ['{\n            ', '",\n           ', '\n        },\n        {\n            ', '    "' + identifiers[kol_file] + '":[\n        ', ' : ']
+                
+                if kol_file == (len(filenames_csv) - 1):
                     red_a.append('}]')
                     red_b.append('\n        }\n    ]\n}')
 
@@ -187,11 +194,13 @@ class cs:
 
             try:
                 filename_json = filename_json.replace(".json", "")
-                if file == 0:
+                # Создание файла в формате .json и запись в него обработанной информации
+                if kol_file == 0:
                     with open(filename_json + ".json", "w") as f:
                         f.write(out)
                     print("Файл .json создан")
                 else:
+                # Дозапись в файл в формата .json обработанной информации    
                     with open(filename_json + ".json", "a") as f:
                         f.write(out)
                     print("Файл .json дописан")
@@ -200,4 +209,4 @@ class cs:
                     None
                 else:
                     print("Ну удалось создать .json файл")
-            file += 1
+            kol_file += 1
