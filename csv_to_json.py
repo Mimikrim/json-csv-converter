@@ -2,14 +2,14 @@
 import csv
 import json
 
-def common_csv(filename_csv, filename_json, red_a, red_b):
+def common_csv(filename_csv, filename_json, red_a, red_b, delimiter):
     try:
         filename_csv = filename_csv.replace(".csv", "")
         csvfile = open(filename_csv + ".csv", 'r', encoding = "UTF-8")
     except:
         print("Не удалось открыть .csv файл")
         exit()
-    reader = csv.DictReader(csvfile, delimiter = ";")
+    reader = csv.DictReader(csvfile, delimiter = delimiter)
     out = json.dumps( [ row for row in reader ] )
 
     if red_a == None and red_b == None:
@@ -37,7 +37,7 @@ def common_csv(filename_csv, filename_json, red_a, red_b):
         else:
             print("Ну удалось создать .json файл")
 
-def csv_to_json_several_files(filenames_csv, identifiers, filename_json):
+def csv_to_json_several_files(filenames_csv, identifiers, filename_json, delimiter):
     file = 0
     while file < len(filenames_csv):
         try:
@@ -46,8 +46,8 @@ def csv_to_json_several_files(filenames_csv, identifiers, filename_json):
         except:
             print("Не удалось открыть .csv файл")
             exit()
-        reader = csv.DictReader(csvfile, delimiter = ";")
-        out = json.dumps( [ row for row in reader ] )
+        reader = csv.DictReader(csvfile, delimiter = delimiter)
+        out = json.dumps([ row for row in reader ])
 
         
         if file == 0:
