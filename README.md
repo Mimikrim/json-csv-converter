@@ -13,4 +13,4 @@
 
 Функция csv_to_json_several_files может преобразовать 2 файла File_with_attachments_with_ID.json и File_with_attachments_with_ID_names_of_animal_owners.csv из папки files в файл test_several_csv_files.json из папки test_files.
 
-Перед вызовом функций НУЖНО отдельно указать директорию в которой будут искаться файлы.
+Перед вызовом функций НУЖНО отдельно указать директорию в которой будет осуществлятся поиск файлов.
