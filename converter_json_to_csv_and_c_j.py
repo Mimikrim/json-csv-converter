@@ -11,9 +11,10 @@ class js:
         try:
             with open(filename_json + ".json", mode = "r", encoding = "UTF-8") as json_file:
                     data = json.load(json_file)
-        except:
-            print("Не удалось открыть .json файл")
-            exit()
+        except FileNotFoundError:
+            raise FileNotFoundError("JSON-файл не найден")
+        except Exception as e:
+            raise Exception(f"Ошибка при чтении JSON-файла: {e}")
         # Работаем с будущими именами столбцов файла .csv
         col = []
     
@@ -65,9 +66,8 @@ class js:
                     array_worlds = array_str_data[i].split(",")
                     file_writer.writerow(array_worlds)
                     i += 1
-        except:
-            print("Не удалось создать .csv файл")
-            exit()
+        except Exception as e:
+            raise Exception(f"Ошибка при записи в CSV-файл: {e}")
 
     def json_to_csv_with_id(identifiers, filename_json, filename_csv,  delimiter):
 
@@ -77,9 +77,10 @@ class js:
         try:
             with open (filename_json + ".json", "r") as json_file:
                 data = json.load(json_file)
-        except:
-            print("Не удалось открыть .json файл")
-            exit()
+        except FileNotFoundError:
+            raise FileNotFoundError("JSON-файл не найден")
+        except Exception as e:
+            raise Exception(f"Ошибка при чтении JSON-файла: {e}")
 
         i = 0
         # В цикле один файл формата .json конвертируется в несколько файлов в формате .csv по указанными идентификаторам
@@ -92,9 +93,8 @@ class js:
                     writer.writeheader()
                     for id in ids:
                         writer.writerow(id)
-            except:
-                print("Не удалось создать .csv файл")
-                exit()
+            except Exception as e:
+                raise Exception(f"Ошибка при записи в CSV-файл: {e}")
             i += 1
 
 class cs:
@@ -104,9 +104,11 @@ class cs:
         try:
             filename_csv = filename_csv.replace(".csv", "")
             csvfile = open(filename_csv + ".csv", 'r', encoding = "UTF-8")
-        except:
-            print("Не удалось открыть .csv файл")
-            exit()
+        except FileNotFoundError:
+            raise FileNotFoundError("CSV-файл не найден")
+        except Exception as e:
+            raise Exception(f"Ошибка при чтении CSV-файла: {e}")
+
         # Преобразуем информацию из переменной csvfile формата csv в одну строку
         reader = csv.DictReader(csvfile, delimiter = delimiter)
         out = json.dumps( [ row for row in reader ] )
@@ -121,20 +123,17 @@ class cs:
             while i < len(red_a):
                 out = out.replace(red_a[i], red_b[i])
                 i += 1
-        except:
-            print("Редактирование не удалось")
-            print("Файл будет создан без редактирования")
+        except Exception as e:
+            print(f"Редактирование не удалось: {e}")
+
         # Создание файла в формате .json и запись в него обработанной информации
         try:
             filename_json = filename_json.replace(".json", "")
             with open(filename_json + ".json", 'w') as f:
                 f.write(out)
             print("Файл .json создан")
-        except:
-            if (print("Файл .json создан")):
-                None
-            else:
-                print("Ну удалось создать .json файл")
+        except Exception as e:
+            print(f"Ошибка при записи в JSON-файл: {e}")
 
     def csv_to_json_several_files(filenames_csv, identifiers, filename_json, delimiter):
         # Переменная kol_file это количество преобразуемых csv файлов в файл json
@@ -144,9 +143,12 @@ class cs:
             try:
                 filenames_csv[kol_file] = filenames_csv[kol_file].replace(".csv", "")
                 csvfile = open(filenames_csv[kol_file] + ".csv", 'r', encoding = "UTF-8")
-            except:
-                print("Не удалось открыть .csv файл")
-                exit()
+            except FileNotFoundError:
+                print(f"CSV-файл '{filenames_csv[kol_file]}' не найден.")
+                continue
+            except Exception as e:
+                raise Exception(f"Ошибка при чтении CSV-файла: {e}")
+
             # Преобразуем информацию из переменной csvfile формата csv в одну строку    
             reader = csv.DictReader(csvfile, delimiter = delimiter)
             out = json.dumps( [ row for row in reader ] )
@@ -168,9 +170,8 @@ class cs:
                     while i < len(red_a):
                         out = out.replace(red_a[i], red_b[i])
                         i += 1
-                except:
-                    print("Редактирование не удалось")
-                    print("Файл будет создан без редактирования")
+                except Exception as e:
+                    print(f"Редактирование не удалось: {e}")
 
             if kol_file != 0:
                 red_a = ['{', '",', '}, {\n            ', '[',': ']
@@ -188,9 +189,8 @@ class cs:
                     while i < len(red_a):
                         out = out.replace(red_a[i], red_b[i])
                         i += 1
-                except:
-                    print("Редактирование не удалось")
-                    print("Файл будет создан без редактирования")
+                except Exception as e:
+                    print(f"Редактирование не удалось: {e}")
 
             try:
                 filename_json = filename_json.replace(".json", "")
@@ -204,9 +204,6 @@ class cs:
                     with open(filename_json + ".json", "a") as f:
                         f.write(out)
                     print("Файл .json дописан")
-            except:
-                if (print("Файл .json создан")):
-                    None
-                else:
-                    print("Ну удалось создать .json файл")
+            except Exception as e:
+                print(f"Ошибка при записи в JSON-файл: {e}")
             kol_file += 1
